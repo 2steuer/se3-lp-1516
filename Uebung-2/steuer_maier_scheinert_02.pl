@@ -4,9 +4,9 @@
 % Dominik Scheinert (6680325)
 % Colin Maier (6701950)
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 1
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ?- [familie].
 
 % (a) Die Enkelkinder von Opa, aber nur die von Opas Töchtern.
@@ -82,3 +82,60 @@
 % Geschwister2 = hugo,
 % Z = marie ;
 % false.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+?- [haeuser].
+
+% (1)
+?- obj(ID, Typ, bahnhofsstr, Nr, Baujahr).
+% ID = 2,
+% Typ = efh,
+% Nr = 27,
+% Baujahr = 1943 ;
+% ID = 3,
+% Typ = efh,
+% Nr = 29,
+% Baujahr = 1997 ;
+% ID = 4,
+% Typ = mfh,
+% Nr = 28,
+% Baujahr = 1989 ;
+% ID = 5,
+% Typ = bahnhof,
+% Nr = 30,
+% Baujahr = 1901 ;
+% ID = 6,
+% Typ = kaufhaus,
+% Nr = 26,
+% Baujahr = 1997.
+
+% (2)
+?- obj(ID, Typ, Strasse, Nr, Baujahr), Baujahr < 1950.
+% ID = 2,
+% Typ = efh,
+% Strasse = bahnhofsstr,
+% Nr = 27,
+% Baujahr = 1943 ;
+% ID = 5,
+% Typ = bahnhof,
+% Strasse = bahnhofsstr,
+% Nr = 30,
+% Baujahr = 1901 ;
+% false.
+
+% (3)
+?- obj(GID,_,_,_,_), bew(_,GID,_,Kaeufer,Preis,_), Preis > 300000.
+% GID = 3,
+% Kaeufer = mueller,
+% Preis = 315000 ;
+% GID = 5,
+% Kaeufer = piepenbrink,
+% Preis = 1500000 ;
+% false.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
