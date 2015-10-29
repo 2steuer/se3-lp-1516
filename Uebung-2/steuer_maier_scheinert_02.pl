@@ -54,5 +54,26 @@
 % false.
 
 % (d) P2 ist der Schwager von P1.
+?- mutter_von(X, Schwager1), mutter_von(X, Y), mutter_von(Y, Z), vater_von(Schwager2, Z), Y \= Schwager1.
+% X = charlotte,
+% Schwager1 = magdalena,
+% Y = barbara,
+% Z = klaus,
+% Schwager2 = johannes ;
+% X = charlotte,
+% Schwager1 = magdalena,
+% Y = barbara,
+% Z = andrea,
+% Schwager2 = johannes ;
 
-% (e) P1 und P2 sind Stiefgeschwister.
+% (e) P1 und P2 sind Stiefgeschwister von der selben Mutter aber zwei verschiedenen Vaetern.
+?- assertz(mutter_von(marie, hugo)).
+?- assertz(vater_von(walter,hugo)).
+
+?- vater_von(X,Geschwister1), vater_von(Y,Geschwister2), mutter_von(Z, Geschwister1), mutter_von(Z, Geschwister2), Geschwister1 \= Geschwister2, X \= Y.
+% X = otto,
+% Geschwister1 = hans,
+% Y = walter,
+% Geschwister2 = hugo,
+% Z = marie ;
+% false.
