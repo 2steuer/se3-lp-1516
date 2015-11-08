@@ -121,4 +121,53 @@ true.
 false.
 
 
+?- assert((changeDateHelper(DirID,NeuesDatum):- dir_existiert(DirID), retract((directory(DirID,N,P,D,_))), assert((directory(DirID,N,P,D,date(NeuesDatum)))))).
+true.
+
+?- assert((aendereDatum(DirID,NeuesDatum,Status) :- changeDateHelper(DirID,NeuesDatum), Status = transaktion_erfolgreich)).
+true.
+
+?- listing(directory/5).
+:- dynamic directory/5.
+
+directory(1, root, 0, date(2007, 5, 2), date(2007, 5, 2)).
+directory(2, bilder, 1, date(2007, 5, 2), date(2009, 11, 2)).
+directory(3, musik, 1, date(2007, 5, 2), date(2009, 10, 4)).
+directory(4, dokumente, 1, date(2007, 5, 2), date(2009, 11, 5)).
+directory(5, urlaub, 2, date(2008, 6, 22), date(2009, 8, 15)).
+directory(6, hochzeit, 2, date(2008, 1, 27), date(2008, 1, 31)).
+directory(7, kinder, 2, date(2007, 5, 2), date(2009, 9, 5)).
+directory(8, klassik, 3, date(2007, 5, 2), date(2007, 5, 2)).
+directory(9, pop, 3, date(2007, 5, 2), date(2009, 11, 5)).
+directory(10, urlaub, 4, date(2008, 5, 23), date(2008, 11, 1)).
+directory(11, hochzeit, 4, date(2007, 12, 4), date(2008, 1, 25)).
+directory(12, scheidung, 4, date(2009, 9, 2), date(2009, 11, 5)).
+
+true.
+
+?- aendereDatum(12,(2015,11,11),Status).
+Status = transaktion_erfolgreich.
+
+?- listing(directory/5).
+:- dynamic directory/5.
+
+directory(1, root, 0, date(2007, 5, 2), date(2007, 5, 2)).
+directory(2, bilder, 1, date(2007, 5, 2), date(2009, 11, 2)).
+directory(3, musik, 1, date(2007, 5, 2), date(2009, 10, 4)).
+directory(4, dokumente, 1, date(2007, 5, 2), date(2009, 11, 5)).
+directory(5, urlaub, 2, date(2008, 6, 22), date(2009, 8, 15)).
+directory(6, hochzeit, 2, date(2008, 1, 27), date(2008, 1, 31)).
+directory(7, kinder, 2, date(2007, 5, 2), date(2009, 9, 5)).
+directory(8, klassik, 3, date(2007, 5, 2), date(2007, 5, 2)).
+directory(9, pop, 3, date(2007, 5, 2), date(2009, 11, 5)).
+directory(10, urlaub, 4, date(2008, 5, 23), date(2008, 11, 1)).
+directory(11, hochzeit, 4, date(2007, 12, 4), date(2008, 1, 25)).
+directory(12, scheidung, 4, date(2009, 9, 2), date((2015, 11, 11))).
+
+true.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 4.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
