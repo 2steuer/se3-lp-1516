@@ -107,3 +107,18 @@ Anzahl = 4
 ?- fileanzahl_von_dir(DIR,Anzahl).
 Anzahl = 14 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 4.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+?- assert((dir_existiert(DirID):- directory(DirID,_,_,_,_))).
+true.
+
+?- dir_existiert(1).
+true.
+
+?- dir_existiert(13).
+false.
+
+
+
