@@ -1,4 +1,4 @@
-% Blatt 3
+﻿% Blatt 3
 
 % Merlin Steuer (6415125)
 % Dominik Scheinert (6680325)
@@ -7,8 +7,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Syntax: Die Syntax einer (Programmier)Sprache beschreibt, welche Zeichenfolgen zulässig sind.
-Semantik: Die Semantik einer Sprache beschreibt, wie die zulässigen Zeichenfolgen interpretiert werden.
+Syntax: Die Syntax einer (Programmier)Sprache beschreibt mittels eines Systems von Regeln, welche Zeichenfolgen und Konstruktionen zulässig sind.
+Semantik: Die Semantik einer Sprache beschreibt, wie die zulässigen Zeichenfolgen interpretiert werden. Denotationell geschieht dies mittels
+Zustandsübergangsfunktionen, operational mittels Zustandstransformationen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 2.1
