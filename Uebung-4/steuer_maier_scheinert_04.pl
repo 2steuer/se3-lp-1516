@@ -7,8 +7,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-...
+A ist das Geburtsjahr von B: 
+Diese Relation ist nicht symmetrisch, da A ein Jahr und B ein Mensch (Wesen, ...) ist, und zb. ein Jahr kein Geburtsjahr hat.
+Diese Relation ist nicht reflexiv, da A ein Jahr und B ein Mensch (Wesen, ...) ist, und zb. ein Jahr kein Geburtsjahr hat.
+Diese Relation ist transitiv, da sich bei einem Element (A,B) kein Element (B,C) finden wird, da B sonst Mensch und Jahr wäre.
+Diese Relation ist funktional in B, da jeder Mensch ein eindeutiges Geburtsjahr hat.
 
+A ist Nachbargrundstück von B:
+Diese Relation ist symmetrisch, da wenn A neben B liegt auch B neben A liegt.
+Diese Relation ist nicht reflexiv, da A nicht neben sich selbst liegt.
+Diese Relation ist nicht transitiv, da zB für eine Anordung von Grundstücken A B C gilt: R(A,B) und R(B,C), aber nicht R(A,C).
+Diese Relation ist nicht funktional, da ein Grundstück zwei Nachbarn haben kann, und R symmetrisch ist.
+
+A ist leichter als B:
+Diese Relation ist nicht symmetrisch, da wenn A leichter als B ist, B natürlich nicht leichter als A ist.
+Diese Relation ist nicht reflexiv, da A genauso schwer, also nicht leichter als B ist.
+Diese Relation ist transitiv, denn wenn A leichter als B und B leichter als C ist, ist A im Besonderen leichter als C.
+Diese Relation ist nicht funktional, da es potentiell unendlich viele leichtere bzw. schwerere Elemente geben kann.
+
+A ist kleiner oder gleich B:
+Diese Relation ist nicht symmetrisch, wenn A echt kleiner als B ist, B natürlich nicht kleiner als A ist.
+Diese Relation ist reflexiv, da A gleich A ist.
+Diese Relation ist transitiv, denn wenn A kleiner als B und B kleiner als C ist, ist A im Besonderen kleiner als C.
+Diese Relation ist nicht funktional, da es potentiell unendlich viele kleinere bzw. größere Elemente geben kann.
+Bem: Dieses Relation ist zudem noch anti-symmetrisch und damit eine Ordnungsrelation.
+
+A hat schon einmal in einer Mannschaft mit B gespielt:
+Diese Relation ist symmetrisch, da wenn A mit B in einer Mannschaft gespielt hat, B natürlich auch mit A in einer Mannschaft gespielt hat.
+Diese Relation ist nicht reflexiv, da man nicht mit sich selbst in einer Mannschaft spielen kann.
+Diese Relation ist nicht transitiv, da wenn A und B zusammen in Mannschaft X gespielt haben, und B und C in Mannschaft Y, A und C nicht zwingend auch in einer gemeinsamen Mannschaft gespielt haben.
+Diese Relation ist nicht funktional, da A mit endlich vielen, aber im Besonderen durchaus mit mehr als einem in einer Mannschaft gespielt hat, und die Relation symmetrisch ist.
+
+A ist kongruent zu B:
+Diese Relation ist symmetrisch, da wenn A zu B kongruent ist, B auch zu A kongruent ist.
+Diese Relation ist reflexiv, da A zu sich selbst kongruent ist.
+Diese Relation ist transitiv, da wenn A kongruent zu B ist, und B zu C, auch A zu C kongruent ist.
+Diese Relation ist nicht funktional, da A zu potentiell unendlich vielen Elementen kongruent sein kann, und R symmetrisch ist.
+Bem: Diese Relation ist eine Äquivalenzrelation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 2.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,7 +90,7 @@ false.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Praedikate wurden in fluss.pl definiert.
 
-% Terminierungssicher, da von einem Ort1 immer nur der unmittelbare Ort2 flussabw�rts gezaehlt wird,
+% Terminierungssicher, da von einem Ort1 immer nur der unmittelbare Ort2 flussabwärts gezaehlt wird,
 % und ggf. alle Orte, die von diesem Ort2 betroffen sind.(Transitivitaet)
 % Da Fluesse bekanntlich nicht im Kreis verlaufen, terminiert unsere Loesung immer.
 
