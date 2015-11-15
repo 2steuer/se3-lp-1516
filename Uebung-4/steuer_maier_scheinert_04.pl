@@ -191,5 +191,5 @@ false.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Auch dieses Prädikat ist in fluss.pl definiert.
 
-?- ist_erreichbar_von(hamburg, praha). % über muendung_moldau
+?- ist_erreichbar_von(hamburg, brandenburg). % über muendung_moldau
 true .
