@@ -1,4 +1,4 @@
-% liegt_liegt_stromaufwaerts_von_von(Fluss,Ort1,Ort2,Distanz)
+% liegt_stromaufwaerts_von(Fluss,Ort1,Ort2,Distanz)
 % ist wahr, wenn fuer zwei an einem Fluss liegende
 % Ortschaften die natuerliche Fliessrichtung des Wassers von
 % Ort1 zu Ort2 verlaeuft 
@@ -69,8 +69,22 @@ ist_erreichbar_von(Ort1, Ort2) :-
 
 
                         
+%% Aufgabe 3.4
 
+% kanal(Fluss1,Fluss2)
+% ist wahr, wenn zwischen Fluss 1 und Fluss 2 eine Kanalverbindung besteht.
 
+kanal(elbe,havel).
+
+% Wir nehmen an, ein Kanal hat an beiden Enden eine Schleuse, daher ist das Prädikat "ist_betroffen_von" nicht betroffen.
+
+% Allerdings sind mehr Orte erreichbar:
+ist_erreichbar_von(Ort1, Ort2) :-
+ 				  ist_erreichbar_von(Ort1, OrtX),
+ 				  liegt_stromaufwaerts_von(FlussA,OrtX,_,_),
+ 				  kanal(FlussA,FlussB),
+ 				  liegt_stromaufwaerts_von(FlussA,OrtY,_,_),
+ 				  ist_erreichbar_von(OrtY, Ort2),
 
 
 
