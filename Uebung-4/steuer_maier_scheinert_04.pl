@@ -185,3 +185,11 @@ false.
 
 % Diese relation ist Symmetrisch (ist A von B aus erreichbar, ist auch B von A aus erreichbar), transitiv (Ist A von B aus erreichbar, und C von A aus,
 % so ist auch C von B aus erreichbar) sowie reflexiv (von A kommt man immer nach A).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 3.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auch dieses Prädikat ist in fluss.pl definiert.
+
+?- ist_erreichbar_von(hamburg, praha). % über muendung_moldau
+true .
