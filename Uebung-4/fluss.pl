@@ -83,7 +83,7 @@ ist_erreichbar_von(Ort1, Ort2) :-
  				  ist_erreichbar_von(Ort1, OrtX),
  				  liegt_stromaufwaerts_von(FlussA,OrtX,_,_),
  				  kanal(FlussA,FlussB),
- 				  liegt_stromaufwaerts_von(FlussA,OrtY,_,_),
+ 				  liegt_stromaufwaerts_von(FlussB,OrtY,_,_),
  				  ist_erreichbar_von(OrtY, Ort2),
 
 
