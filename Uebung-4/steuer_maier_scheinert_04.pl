@@ -174,3 +174,6 @@ false.
 % Offenbar scheint hier eine relativ tiefe Rekursionstiefe durchlaufen zu werden. (Der Weg ist ja auch lang.)
 % frage man ist_erreichbar_von(praha, X)., so werden schier unendlich viele Werte für X ausgegeben, die sich alle doppeln. 
 % Lösen könnte man dies, indem man eine Liste mit Orten hält, die jeweils schon ein mal bearbeitet wurden.
+
+% Diese relation ist Symmetrisch (ist A von B aus erreichbar, ist auch B von A aus erreichbar), transitiv (Ist A von B aus erreichbar, und C von A aus,
+% so ist auch C von B aus erreichbar) sowie reflexiv (von A kommt man immer nach A).
