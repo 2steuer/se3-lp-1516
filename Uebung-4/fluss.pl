@@ -61,15 +61,11 @@ stoerfall_chemiewerk_bitterfeld(Liste):-
  					liegt_stromaufwaerts_von(_,Ort1,Ort2,_).
 
 ist_erreichbar_von(Ort1, Ort2) :-
- 					liegt_stromaufwaerts_von(_,Ort2,Ort1,_).
+ 					ist_erreichbar_von(Ort2, Ort1).
 
  ist_erreichbar_von(Ort1, Ort2) :-
  					liegt_stromaufwaerts_von(_,Ort1,OrtX,_),
  					ist_erreichbar_von(OrtX, Ort2).
-
-ist_erreichbar_von(Ort1, Ort2) :-
- 					liegt_stromaufwaerts_von(_,Ort2,OrtX,_),
- 					ist_erreichbar_von(OrtX, Ort1).
 
 
                         
