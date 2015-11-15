@@ -115,8 +115,10 @@ Betroffener_Ort = rathenow ;
 Betroffener_Ort = brandenburg ;
 false.
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Aufgabe 3.2
+% Aufgabe 3.3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Praedikate wurden in fluss.pl definiert.
 
@@ -143,3 +145,32 @@ Betroffener_Ort = geesthacht ;
 Betroffener_Ort = hamburg ;
 Betroffener_Ort = muendung_elbe ;
 false.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 3.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auch dieses Prädikat ist in fluss.pl definiert.
+
+?- ist_erreichbar_von(hamburg, praha). % über muendung_moldau
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+true ;
+false.
+
+% Offenbar scheint hier eine relativ tiefe Rekursionstiefe durchlaufen zu werden. (Der Weg ist ja auch lang.)
+% frage man ist_erreichbar_von(praha, X)., so werden schier unendlich viele Werte für X ausgegeben, die sich alle doppeln. 
+% Lösen könnte man dies, indem man eine Liste mit Orten hält, die jeweils schon ein mal bearbeitet wurden.
