@@ -85,6 +85,10 @@ Vorbesitzer = schneider ;
 Vorbesitzer = schulze ;
 false.
 
+
+% Kennt man den gesuchten Vorbesitzer und weiß, dass er nicht allzu weit in der Vergangenheit der Vorbesitzer war, bietet sich
+% die zweite Variante an aufgrund weniger Rechenoperationen.
+% Im anderen Fall ist immer Variante Eins vorzuziehen.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 3.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,10 +119,14 @@ Betroffener_Ort = rathenow ;
 Betroffener_Ort = brandenburg ;
 false.
 
-
+% ist_betroffen_von(A,B)
+% Diese Relation ist nicht symmetrisch, da A zwar betroffen von B ist, aber B aufgrund der Fließrichtung nicht von A.
+% Diese Relation ist nicht reflexiv, da A nicht von sich selbst betroffen sein kann.(Laut Funktion...In der echten Welt mag dies anders sein!)
+% Diese Relation ist transitiv, da A von B betroffen sein kann, und B wiederum von C. So ist auch A von C betroffen.
+% Diese Relation ist nicht funktional, da ein Ort A auch an der Mündung von zwei Flüssen liegen kann.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Aufgabe 3.3
+% Aufgabe 3.2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Praedikate wurden in fluss.pl definiert.
 

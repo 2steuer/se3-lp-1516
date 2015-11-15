@@ -54,7 +54,7 @@ ist_betroffen_von(Ort1,Ort2):-
 stoerfall_chemiewerk_bitterfeld(Liste):-
                                findall(BetroffenerOrt,ist_betroffen_von(BetroffenerOrt,bitterfeld),Liste).
 
- %% Aufgabe 3.2
+ %% Aufgabe 3.3
  :- dynamic ist_erreichbar_von/2.
 
  ist_erreichbar_von(Ort1, Ort2) :-
@@ -72,7 +72,7 @@ ist_erreichbar_von(Ort1, Ort2) :-
  					ist_erreichbar_von(OrtX, Ort1).
 
 
-
+                        
 
 
 
