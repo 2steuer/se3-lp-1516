@@ -33,9 +33,21 @@ gte(s(X),s(Y)):- gte(X,Y).
 % Prueft, ob Dividend modulo Divisor = Modulo gilt.
 % Wir nutzen dabei als Hilfspraedikat das gte-Praedikat.
 modulo(s(0),s(0),0).
-modulo(Dividend,Divisor,Modulo):- gte(Dividend,Divisor), subtrahiere(Dividend,Divisor,Differenz), modulo(Differenz,Divisor,Modulo).
-modulo(Dividend,Divisor,Modulo):- not((gte(Dividend,Divisor))), Modulo = Dividend.
+modulo(Dividend,Divisor,Modulo):- 
+                    gte(Dividend,Divisor), 
+                    subtrahiere(Dividend,Divisor,Differenz), 
+                    modulo(Differenz,Divisor,Modulo).
+modulo(Dividend,Divisor,Modulo):- 
+                    not((gte(Dividend,Divisor))), 
+                    Modulo = Dividend.
 
 :- dynamic peanoToInt/2.
 % Struktur: peanoToInt(Peano-Zahl,Integer-Zahl)
 % Wandelt eine Peano-Zahl in eine Integer-Zahl um.
+peanoToInt(0,0).
+peanoToInt(s(X),Y):- Z is Y - 1, peanoToInt(X,Z).
+
+
+
+
+
