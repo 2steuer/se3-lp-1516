@@ -208,8 +208,7 @@ Typtests sind nuetzlich, um die Sicherheit eines Programms zu erhoehen,
 moegliche Fehler oder fehlerhafte Nutzung zu reduzieren
 oder ganz zu vermeiden.
         
-=======
-        
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 3.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -233,4 +232,3 @@ oder ganz zu vermeiden.
     % Negativtest
         % ?- ist_betroffen_von(praha,hamburg,X).
         % false.
->>>>>>> origin/master
