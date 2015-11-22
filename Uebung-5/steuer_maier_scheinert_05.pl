@@ -1,4 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+- b(x,y) unifiziert mit b(Y, X) mit Y = x, X = y.
+- t(r,i) unifiziert mit t(Z, Z) mit Z = r und Z = i, also r = i.
+- b(g(F,k),g(k,F)) unifiziert mit b(g(m,H),g(H,m)) mit F = m, H = k.
+- m(X, c(g), h(x)) unifiziert nicht mit m(t(r,s), c(u), h(g(T)), t), da m jeweils verschiedenstellig ist.
+- false unifizert mit not(true) per definition.
+- False unifiziert mit False = not(true). (False hier Variable).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Aufgabe 2.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Praedikte wurden in praedikate.pl definiert.
