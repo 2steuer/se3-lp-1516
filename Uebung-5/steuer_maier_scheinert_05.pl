@@ -232,3 +232,18 @@ oder ganz zu vermeiden.
     % Negativtest
         % ?- ist_betroffen_von(praha,hamburg,X).
         % false.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Alle Prädikate ähneln sich in der Hinsicht, dass sie Wege innerhalb von Bäumen finden.
+Vor allem die Wegfindungs-Prädikate sollen nun aber auch Wege in allgemeinen gerichteten und ungerichteten Graphejn finden.
+Daher ist es notwendig, dass dort ein Abbruch erfolgt, sobald bspw. ein Weg gesucht wird, welcher in die Falsche Richtung läuft.
+Bei Verwandtscahftsbeziehungen und Vorbesitzern von Immobilien ist dies unter den hier gestellten Annahmen nicht notwendig, so
+entfällt dort möglicherweise auch die Zyklenerkennung, welche in allg. Graphen für eine Terminierung unumgänglich ist.
+Um ein Beispiel zu konstruieren, in welchem auch diese nicht hilft betrachten wir Dateisysteme, welche symbolische Linnks
+auf Ordner unterstützen. Genommen den Fall, es existiert ein Verzeichnis /home/user/test, in diesem legen wir einen Symbolischen Link an,
+welcher /home/user/test/zwo heißt und auf /home/user/ zeigt. Dann sind Pfade wie /home/user/test/zwo/test ebenso gültig wie
+/home/user/test/zwo/test/zwo ... usw. Zyklenerkennung schlägt hier i.d.R. jedoch fehl, da gegenüber Applikationen
+diese symbolischen Links transparent sind.
