@@ -124,3 +124,28 @@ Praedikat: modulo
 
         % ?- modulo(s(s(0)),s(0),s(0)).
         % false.
+        
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 3.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Positivtest
+        % ?- ist_betroffen_von(X,Y,Z).
+        % [...] ;
+        % false
+    
+    % Negativtest
+        % ?- ist_betroffen_von(praha,hamburg,X).
+        % false.
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aufgabe 3.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Positivtest
+        % ?- ist_betroffen_von(X,Y,Z).
+        % [...] ;
+        % false
+    
+    % Negativtest
+        % ?- ist_betroffen_von(praha,hamburg,X).
+        % false.
