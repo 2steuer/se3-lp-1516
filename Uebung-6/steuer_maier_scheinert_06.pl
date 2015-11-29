@@ -132,3 +132,71 @@ Praedikat wurden in praedikate.pl definiert.
 Spannend ist zu beobachten, inwiefern sich das Konvergenzverhalten nach Leibniz-Reihenzerlegung und wallisschem Produkt unterscheidet.
 Während für das Prädikat, welches die Leibniz-Reihenzerlegung implementiert,Pi die untere Schrank darstellt, gegen die es konvergiert,
 ist es bei dem Prädikat, welches das wallissche Produkt realisiert genau andersherum - hier stellt Pi einen oberen Grenzwert dar, der nie erreicht wird.
+
+%%%%%%%%%%%%%%
+Aufgabe 4.1
+%%%%%%%%%%%%%%
+Praedikat wurden in praedikate.pl definiert.
+    Dieses Prädikat ist nicht endrekursiv. Die Berechnung erfolgt beim rekursiven Aufstieg.
+    Tests:
+    ?- binomial(1,1,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+
+    ?- binomial(1,0,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+
+    ?- binomial(5,3,Binomialkoeffizient).
+    Binomialkoeffizient = 10 ;
+    false.
+
+    ?- binomial(51,50,Binomialkoeffizient).
+    Binomialkoeffizient = 51 ;
+    false.
+
+    ?- binomial(6,4,Binomialkoeffizient).
+    Binomialkoeffizient = 15 ;
+    false.
+    
+    Ganz offensichtlich funktioniert das Prädikat. Auch die Abbruchbedingungen der rekursiven Vorschrift,
+    überprüft mit Test 1 und Test 2, werden eingehalten.
+    
+%%%%%%%%%%%%%%
+Aufgabe 4.2
+%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+Aufgabe 4.3
+%%%%%%%%%%%%%%
+Praedikate wurden in praedikate.pl definiert.    
+
+Erste Bonusimplementation: Berechnung beim rekursiven Aufstieg, nicht endrekursiv.
+    Tests:
+    ?- binomial2(1,0,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+    
+    ?- binomial2(5,5,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+    
+    ?- binomial2(5,3,Binomialkoeffizient).
+    Binomialkoeffizient = 10 ;
+    false.
+
+Zweite Bonusimplementation: Berechnung beim rekursiven Abstieg -> Endrekursiv.
+    Tests:
+    ?- binomial3(10,3,Binomialkoeffizient).
+    Binomialkoeffizient = 120.0 ;  % Spannend! Ergebnis wird mit Nachkommastellen zurueckgegeben.
+    false.
+    
+    ?- binomial3(10,10,Binomialkoeffizient). % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    Binomialkoeffizient = 1.0 ;
+    false.
+    
+    ?- binomial3(10,0,Binomialkoeffizient). % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    Binomialkoeffizient = 1 ;
+    false.
+    
+    

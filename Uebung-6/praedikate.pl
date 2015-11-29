@@ -84,6 +84,67 @@ walli(S,Zwischensumme,Resultat):-
             NewSum is Zwischensumme * Quotient,
             S1 is S-1,
             walli(S1,NewSum,Resultat).
-                
-                
+            
+            
+:- dynamic binomial/3.
+% Struktur: binomial(+N,+K,?Ergebnis).
+
+binomial(_,0,1). % Rekursionsaschluss
+binomial(X,X,1). % Rekursionsaschluss
+binomial(N,K,Ergebnis):-
+            N > 0,
+            K > 0,
+            N =\= K,
+            Nneg is N-1,
+            Kneg is K-1,
+            binomial(Nneg,Kneg,Ergebnis1),
+            binomial(Nneg,K,Ergebnis2),
+            Ergebnis is Ergebnis1 + Ergebnis2.
+%------------------------------------------------------------------                
+% Bonus:
+% Hilfspraedikat zur Berechnung der Fakultät.
+fak(0,1). 
+fak(Zahl,Fakultaet):- 
+   Zahl > 0, 
+   Zahl1 is Zahl - 1, 
+   fak(Zahl1,Fakultaet1), 
+   Fakultaet is Zahl * Fakultaet1.
+
+% Umsetzung der ersten Bonus-Implementierung.   
+:- dynamic binomial2/3.
+% Struktur: binomial2(+N,+K,?Ergebnis).
+binomial2(N,K,Ergebnis):-
+            fak(N,Fak1),
+            fak(K,Fak2),
+            MinusK is N-K,
+            fak(MinusK,Fak3),
+            Divisor is Fak2 * Fak3,
+            Dividend is Fak1,
+            Ergebnis is Dividend / Divisor.
+            
+% Umsetzung der zweiten Bonus-Implementierung. 
+:- dynamic binomial3/3.
+% Struktur: binomial3(+N,+K,?Ergebnis).
+binomial3(N,K,Ergebnis):- helper(N,K,1,1,Ergebnis).
+
+helper(_,K,Zaehler,Zwischensumme,Ergebnis):- Zaehler > K, Ergebnis is Zwischensumme.
+helper(N,K,Zaehler,Zwischensumme,Ergebnis):-
+            ((Zaehler < K); (Zaehler =:= K)),
+            Dividend is N + 1 - Zaehler,
+            Quotient is Dividend / Zaehler,
+            NewSum is Zwischensumme * Quotient,
+            Zaehler1 is Zaehler + 1,
+            helper(N,K,Zaehler1,NewSum,Ergebnis).
+    
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
                 
