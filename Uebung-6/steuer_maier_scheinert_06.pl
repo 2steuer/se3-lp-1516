@@ -1,4 +1,18 @@
 %%%%%%%%%%%%%%
+Aufgabe 1.2
+%%%%%%%%%%%%%%
+Das Prädikat lautet wie folgt:
+zins_direkt(B,Z,D,G) :- G is (1+Z)^D*B.
+
+%%%%%%%%%%%%%%
+Aufgabe 1.5
+%%%%%%%%%%%%%%
+Da für den variablen Zinssatz VZ(n) nach n Jahren gilt: VZ(n) = (2^(n+1)-1)/(2^(n-1)) gilt, und lim_n->∞ VZ(n) = 4 gilt,
+übersteigt der variable Zinssatz nie den konstanten, sondern ist in jedem einzelnen Jahr schlechter. Daraus folgt selbstverständlich,
+dass auch in der Summe, und damit für jeden Anlegezeitraum der variable Zinssatz schlechter ist.
+
+
+%%%%%%%%%%%%%%
 Aufgabe 2.1
 %%%%%%%%%%%%%%
 Praedikate wurden in praedikate.pl definiert.
@@ -97,7 +111,7 @@ Praedikate wurden in praedikate.pl definiert.
    Exit: (7) mypiendrec(1, 2.666666666666667) ? creep
    Pi = 2.666666666666667 .
    
-   Bei der Abbruchbedingung wird nur noch das Teilergebnis f�r Schritte = 0 hinzuaddiert, und dann steht die Berechnung.
+   Bei der Abbruchbedingung wird nur noch das Teilergebnis für Schritte = 0 hinzuaddiert, und dann steht die Berechnung.
    Sie wird nur noch nach oben durchgereicht, weitere Berechnungen finden nicht mehr statt.
    Dies bedeutet, dass Variante 2 endrekursiv ist.
    
@@ -105,8 +119,8 @@ Praedikate wurden in praedikate.pl definiert.
 Aufgabe 2.2
 %%%%%%%%%%%%%%
 Variante 2 ist vorzuziehen. Da bei Rekursionen die Zwischenergebnisse auf einem Stack gesammelt werden und dieser den Speicher sprengen kann,
-ist in den meisten F�llen die Endrekursion vorzuziehen. Auch ist sie verst�ndlicher, da ein Au�enstehender sofort erkennen kann,
-dass das Zwischenergebnis immer mitgenommen wird, und sp�ter dann zum Ergebnis wird.
+ist in den meisten Fällen die Endrekursion vorzuziehen. Auch ist sie verständlicher, da ein Außenstehender sofort erkennen kann,
+dass das Zwischenergebnis immer mitgenommen wird, und später dann zum Ergebnis wird.
 
 %%%%%%%%%%%%%%
 Aufgabe 2.3
@@ -130,5 +144,73 @@ Praedikat wurden in praedikate.pl definiert.
     false.
     
 Spannend ist zu beobachten, inwiefern sich das Konvergenzverhalten nach Leibniz-Reihenzerlegung und wallisschem Produkt unterscheidet.
-W�hrend f�r das Pr�dikat, welches die Leibniz-Reihenzerlegung implementiert,Pi die untere Schrank darstellt, gegen die es konvergiert,
-ist es bei dem Pr�dikat, welches das wallissche Produkt realisiert genau andersherum - hier stellt Pi einen oberen Grenzwert dar, der nie erreicht wird.
+Während für das Prädikat, welches die Leibniz-Reihenzerlegung implementiert,Pi die untere Schrank darstellt, gegen die es konvergiert,
+ist es bei dem Prädikat, welches das wallissche Produkt realisiert genau andersherum - hier stellt Pi einen oberen Grenzwert dar, der nie erreicht wird.
+
+%%%%%%%%%%%%%%
+Aufgabe 4.1
+%%%%%%%%%%%%%%
+Praedikat wurden in praedikate.pl definiert.
+    Dieses Prädikat ist nicht endrekursiv. Die Berechnung erfolgt beim rekursiven Aufstieg.
+    Tests:
+    ?- binomial(1,1,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+
+    ?- binomial(1,0,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+
+    ?- binomial(5,3,Binomialkoeffizient).
+    Binomialkoeffizient = 10 ;
+    false.
+
+    ?- binomial(51,50,Binomialkoeffizient).
+    Binomialkoeffizient = 51 ;
+    false.
+
+    ?- binomial(6,4,Binomialkoeffizient).
+    Binomialkoeffizient = 15 ;
+    false.
+    
+    Ganz offensichtlich funktioniert das Prädikat. Auch die Abbruchbedingungen der rekursiven Vorschrift,
+    überprüft mit Test 1 und Test 2, werden eingehalten.
+    
+%%%%%%%%%%%%%%
+Aufgabe 4.2
+%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+Aufgabe 4.3
+%%%%%%%%%%%%%%
+Praedikate wurden in praedikate.pl definiert.    
+
+Erste Bonusimplementation: Berechnung beim rekursiven Aufstieg, nicht endrekursiv.
+    Tests:
+    ?- binomial2(1,0,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+    
+    ?- binomial2(5,5,Binomialkoeffizient).
+    Binomialkoeffizient = 1 ; % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    false.
+    
+    ?- binomial2(5,3,Binomialkoeffizient).
+    Binomialkoeffizient = 10 ;
+    false.
+
+Zweite Bonusimplementation: Berechnung beim rekursiven Abstieg -> Endrekursiv.
+    Tests:
+    ?- binomial3(10,3,Binomialkoeffizient).
+    Binomialkoeffizient = 120.0 ;  % Spannend! Ergebnis wird mit Nachkommastellen zurueckgegeben.
+    false.
+    
+    ?- binomial3(10,10,Binomialkoeffizient). % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    Binomialkoeffizient = 1.0 ;
+    false.
+    
+    ?- binomial3(10,0,Binomialkoeffizient). % Prüfung auf mathematisch korrekte Implementation der rekursiven Darstellung.
+    Binomialkoeffizient = 1 ;
+    false.
+    
+    
