@@ -126,3 +126,66 @@ information(E,[X|RL],I):- % Ueberspringt "normale" Elemente der Liste, also jene
         not(compound(X)),
         information(E,RL,I).
         
+%%%%%%%%%%%%%%
+% Aufgabe 4.1
+%%%%%%%%%%%%%%
+
+% ham_eqlength(?List1,?List2,?Distanz), nicht völlig unterspezifiziert
+
+ham_eqlength([],[],0).
+ham_eqlength(A,B,D) :- A = [AE|A1], B = [BE|B1], AE = BE, ham_eqlength(A1,B1,D).
+ham_eqlength(A,B,D) :- A = [AE|A1], B = [BE|B1], AE @< BE, ham_eqlength(A1,B1,D1), D is D1+1.
+ham_eqlength(A,B,D) :- A = [AE|A1], B = [BE|B1], AE @> BE, ham_eqlength(A1,B1,D1), D is D1+1.
+
+%%%%%%%%%%%%%%
+% Aufgabe 4.2
+%%%%%%%%%%%%%%
+
+% ham(+List1,+List2,?Distanz)
+
+ham([],[],0).
+ham([],B,D) :- length(B,D).
+ham(A,[],D) :- length(A,D).
+ham(A,B,D) :- A = [AE|A1], B = [BE|B1], AE = BE, ham(A1,B1,D).
+ham(A,B,D) :- A = [AE|A1], B = [BE|B1], AE @< BE, ham(A1,B1,D1), D is D1+1.
+ham(A,B,D) :- A = [AE|A1], B = [BE|B1], AE @> BE, ham(A1,B1,D1), D is D1+1.
+
+%%%%%%%%%%%%%%
+% Aufgabe 4.3
+%%%%%%%%%%%%%%
+
+% ham_list(+List1,+List2,?Distanz,?Zuordnung)
+
+ham_list([],[],0,[]).
+ham_list([],[BE|B1],D,L) :- L = [[*,BE]|L1], ham_list([],B1,D1,L1), D is D1+1.
+ham_list([AE|A1],[],D,L) :- L = [[*,AE]|L1], ham_list(A1,[],D1,L1), D is D1+1.
+ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE = BE, L = [[AE,BE]|L1], ham_list(A1,B1,D,L1).
+ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @< BE, L = [[AE,BE]|L1], ham_list(A1,B1,D1,L1), D is D1+1.
+ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @> BE, L = [[AE,BE]|L1], ham_list(A1,B1,D1,L1), D is D1+1.
+
+%%%%%%%%%%%%%%
+% Aufgabe 4.4
+%%%%%%%%%%%%%%
+
+% alignment(+List1,+List2,?Distanz,?Zuordnung)
+
+alignment([],[],0,[]).
+alignment([],[BE|B1],D,L) :- L = [[*,BE]|L1], alignment([],B1,D1,L1), D is D1+1.
+alignment([AE|A1],[],D,L) :- L = [[*,AE]|L1], alignment(A1,[],D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE = BE, L = [[AE,BE]|L1], alignment(A1,B1,D,L1).
+alignment(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @< BE, L = [[AE,BE]|L1], alignment(A1,B1,D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|_], B = [BE|B1], AE @< BE, L = [[*,BE]|L1], alignment(A,B1,D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|A1], B = [BE|_], AE @< BE, L = [[AE,*]|L1], alignment(A1,B,D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @> BE, L = [[AE,BE]|L1], alignment(A1,B1,D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|_], B = [BE|B1], AE @> BE, L = [[*,BE]|L1], alignment(A,B1,D1,L1), D is D1+1.
+alignment(A,B,D,L) :- A = [AE|A1], B = [BE|_], AE @> BE, L = [[AE,*]|L1], alignment(A1,B,D1,L1), D is D1+1.
+
+%%%%%%%%%%%%%%
+% Aufgabe 4.5
+%%%%%%%%%%%%%%
+
+% levenstein(+Liste1,+Liste2,?Levenshtein_Distanz)
+
+levenstein(L1,L2,LDistanz) :-
+    findall(Distanz,alignment(L1,L2,Distanz,_),Distanzen),
+    min_list(Distanzen,LDistanz).        
