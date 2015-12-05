@@ -158,7 +158,7 @@ ham(A,B,D) :- A = [AE|A1], B = [BE|B1], AE @> BE, ham(A1,B1,D1), D is D1+1.
 
 ham_list([],[],0,[]).
 ham_list([],[BE|B1],D,L) :- L = [[*,BE]|L1], ham_list([],B1,D1,L1), D is D1+1.
-ham_list([AE|A1],[],D,L) :- L = [[*,AE]|L1], ham_list(A1,[],D1,L1), D is D1+1.
+ham_list([AE|A1],[],D,L) :- L = [[AE,*]|L1], ham_list(A1,[],D1,L1), D is D1+1.
 ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE = BE, L = [[AE,BE]|L1], ham_list(A1,B1,D,L1).
 ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @< BE, L = [[AE,BE]|L1], ham_list(A1,B1,D1,L1), D is D1+1.
 ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @> BE, L = [[AE,BE]|L1], ham_list(A1,B1,D1,L1), D is D1+1.
@@ -171,7 +171,7 @@ ham_list(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @> BE, L = [[AE,BE]|L1], ham_l
 
 alignment([],[],0,[]).
 alignment([],[BE|B1],D,L) :- L = [[*,BE]|L1], alignment([],B1,D1,L1), D is D1+1.
-alignment([AE|A1],[],D,L) :- L = [[*,AE]|L1], alignment(A1,[],D1,L1), D is D1+1.
+alignment([AE|A1],[],D,L) :- L = [[AE,*]|L1], alignment(A1,[],D1,L1), D is D1+1.
 alignment(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE = BE, L = [[AE,BE]|L1], alignment(A1,B1,D,L1).
 alignment(A,B,D,L) :- A = [AE|A1], B = [BE|B1], AE @< BE, L = [[AE,BE]|L1], alignment(A1,B1,D1,L1), D is D1+1.
 alignment(A,B,D,L) :- A = [AE|_], B = [BE|B1], AE @< BE, L = [[*,BE]|L1], alignment(A,B1,D1,L1), D is D1+1.
