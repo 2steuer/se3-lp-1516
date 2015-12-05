@@ -546,3 +546,6 @@
 % D = 11,
 % Z = [[*, _G463433], [*, _G463445], [*, _G463457], [*, _G463469], [*, _G463481], [*, _G463493], [*, _G463505], [*|...], [...|...]|...] ;
 % ...
+%
+% Die Menge ist endlich, da beide Listen endlich sind, und die Ergebnisse höchstens die addierte Länge der beiden Listen haben können.
+% Doppelergebnisse werden nicht produziert.
