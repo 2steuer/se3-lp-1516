@@ -547,5 +547,14 @@
 % Z = [[*, _G463433], [*, _G463445], [*, _G463457], [*, _G463469], [*, _G463481], [*, _G463493], [*, _G463505], [*|...], [...|...]|...] ;
 % ...
 %
-% Die Menge ist endlich, da beide Listen endlich sind, und die Ergebnisse höchstens die addierte Länge der beiden Listen haben können.
+% Die Lösungsmenge ist endlich, da beide Listen endlich sind, und die Ergebnisse höchstens die addierte Länge der beiden Listen haben können.
 % Doppelergebnisse werden nicht produziert.
+
+%%%%%%%%%%%%%%
+% Aufgabe 4.5
+%%%%%%%%%%%%%%
+
+% Der Lösungsraum wird sehr schnell sehr groß, und durch das findall wird der komplette Raum erst berechnet, bevor ein Ergebnis feststeht.
+% Optimieren könnte man dies durch eine Anpassung des alignment-Prädikats, zum Beispiel (was teilweise bereits umgesetzt wurde) indem man nicht nötige Ergebnisse verhindert:
+% Bei Gleichheit setze ich nicht noch ein Zeichen ein, genauso könnte man es für unnötig befinden, durch das Einfügen von Sonderzeichen die Länge der kürzeren Liste länger als die der längeren zu machen.
+% Selbstverständlich muss man sich bei jedem dieser Schritte bewusst machen, was geändert wird, und ob man den Lösungsraum nicht zu stark einschränkt, und eine Konfiguration mit einer geringeren Differenz nicht zu betrachten. 
