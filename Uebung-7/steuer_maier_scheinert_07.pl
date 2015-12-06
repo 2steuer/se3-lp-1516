@@ -72,7 +72,8 @@
     % Baum = t(w(2, "Wurzel"), t(w(1, "KnotenLinks"), t(0, end, end), end), t(3, end, t(w(4, "KnotenRechts"), end, end))) .
     
     % Test, ob die alte Funktionalitaet unbeschaedigt ist.
-    Baum = t(2, t(1, t(0, end, end), end), t(3, end, t(4, end, end))) .
+    % ?- list2tree([2,3,1,0,4],Baum).
+    % Baum = t(2, t(1, t(0, end, end), end), t(3, end, t(4, end, end))) .
    
 % 3)
 % Idee: Wir benutzen das Praedikat aus dem Skript, mit dem man einen Baum in eine Liste umwandeln kann.
@@ -111,6 +112,9 @@
     
     % ?- getinfo(3,t(w(2, "Wurzel"), t(w(2, "KnotenLinks"), end, end), t(3, end, end)),Information).
     % false.
+    
+% 4)
+
     
 %%%%%%%%%%%%%%%%%%%
 %% Aufgabe 4(3) %%%
