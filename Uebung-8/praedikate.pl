@@ -5,7 +5,7 @@ darstellung([A,B,C,D,E,F,G,H],Darstellung):-
 
 changeback(Geld,Zerlegung):- wechselgeld(Geld,[0,0,0,0,0,0,0,0],Zerlegung).
    
-wechselgeld(0,L,Z):- darstellung(L,Z).
+wechselgeld(0,Liste,Zerlegung):- darstellung(Liste,Zerlegung). % Abbruchbedingung.
 
 wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 200, 
                                                NewGeld is Geld - 200, 
