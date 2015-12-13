@@ -84,3 +84,10 @@ word2subtrie([], Payload, [*, Payload]).
 word2subtrie([Letter|Restword], Payload, [Letter|RestTrie]) :- 
 			word2subtrie(Restword, Payload, SubTrie),
 			RestTrie = [SubTrie].
+
+
+% insert_entry(+Schlüssel, +Nutzinformation, +Alter_Trie, ?Neuer_Trie)
+
+insert_entry([S1|S],N,AT,[ZW|NT]) :- select([S1|X],AT,ZW), X = [Y|_], insert_entry(S,N,Y,NT).
+insert_entry([S1|S],N,AT,[AT|[NT]]) :- \+select([S1|_],AT,_), word2subtrie([S1|S],N,NT).
+insert_entry([],N,AT,[AT|[*, N]]).
