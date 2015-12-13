@@ -1,73 +1,36 @@
-<<<<<<< HEAD
-%%% 1.1 Münzautomat %%%
-darstellung([A,B,C,D,E,F,G,H],Darstellung):- 
-                            Darstellung = [eincent(A),zweicent(B),fuenfcent(C),zehncent(D),zwanzigcent(E),fuenfzigcent(F),eineuro(G),zweieuro(H)].
-
-
-changeback(Geld,Zerlegung):- wechselgeld(Geld,[0,0,0,0,0,0,0,0],Zerlegung).
-   
-wechselgeld(0,Liste,Zerlegung):- darstellung(Liste,Zerlegung). % Abbruchbedingung.
-
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 200, 
-                                               NewGeld is Geld - 200, 
-                                               H1 is H + 1,
-                                               wechselgeld(NewGeld,[A,B,C,D,E,F,G,H1],Zerlegung).
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 100, 
-                                               NewGeld is Geld - 100, 
-                                               G1 is G + 1,
-                                               wechselgeld(NewGeld,[A,B,C,D,E,F,G1,H],Zerlegung).
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 50, 
-                                               NewGeld is Geld - 50, 
-                                               F1 is F + 1,
-                                               wechselgeld(NewGeld,[A,B,C,D,E,F1,G,H],Zerlegung).   
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 20, 
-                                               NewGeld is Geld - 20, 
-                                               E1 is E + 1,
-                                               wechselgeld(NewGeld,[A,B,C,D,E1,F,G,H],Zerlegung).     
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 10, 
-                                               NewGeld is Geld - 10, 
-                                               D1 is D + 1,
-                                               wechselgeld(NewGeld,[A,B,C,D1,E,F,G,H],Zerlegung). 
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 5, 
-                                               NewGeld is Geld - 5, 
-                                               C1 is C + 1,
-                                               wechselgeld(NewGeld,[A,B,C1,D,E,F,G,H],Zerlegung).    
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 2,
-                                               NewGeld is Geld - 2,
-                                               B1 is B + 1,
-                                               wechselgeld(NewGeld,[A,B1,C,D,E,F,G,H],Zerlegung).  
-wechselgeld(Geld,[A,B,C,D,E,F,G,H],Zerlegung):- Geld >= 1,
-                                               NewGeld is Geld - 1,
-                                               A1 is A + 1,
-                                               wechselgeld(NewGeld,[A1,B,C,D,E,F,G,H],Zerlegung).                                              
-
-%%% 1.2 Münzautomat %%%
-
-%%% 1.3 Münzautomat %%%
-bestchangeback(Geld,Zerlegung):- changeback(Geld,Zerlegung),!.
-=======
 %%% Aufgabe 1 %%%
-
+% Praedikat fuer Rueckgeld eines bestimmen Betrags.
 % changeback(Geld, Zerlegung, Muenzsystem)
-
 changeback(G,Z,M) :- sort(M,A), reverse(A,B), wechselgeld(G,[0],Z,B).
 
-wechselgeld(0,L,Z,[_]) :- reverse(L,Z).
+% Praedikat, dass moegliche Zerlegungen ermittelt.
+wechselgeld(0,L,Z,[_]) :- reverse(L,Z). % Rekursionsschluss.
 wechselgeld(0,L,Z,[_|M]) :- wechselgeld(0,[0|L],Z,M).
-wechselgeld(G,[L1|L],Z,[M1|M]) :- G >= M1, G1 is G - M1, L2 is L1 + 1, 
-	wechselgeld(G1,[L2|L],Z,[M1|M]).
-wechselgeld(G,L,Z,[_|M]) :- G > 0, wechselgeld(G,[0|L],Z,M).
-
+wechselgeld(G,[L1|L],Z,[M1|M]) :- G >= M1,
+                                  G1 is G - M1, 
+                                  L2 is L1 + 1, 
+                                  wechselgeld(G1,[L2|L],Z,[M1|M]).
+wechselgeld(G,L,Z,[_|M]) :- G > 0, 
+                            wechselgeld(G,[0|L],Z,M).
+                            
+% Optimales Rueckgeld. Minimale Anzahl an Muenzen.
+% Nutzt im Prinzip einfach nur das Praedikat changeback, setzt aber nach der ersten gefundenen Zerlegungen einen Cut.
 % opt_changeback(Geld, Zerlegung, Muenzsystem)
-
 opt_changeback(G,Z,M) :- changeback(G,Z,M),!. 
 
+% Praedikat fuer die Simulation einer Kasse. 
+% Ein gegebener Betrag in einem gegebenen Geldsystem wird als Wechselgeld ausgegeben.
+% Ausserdem wird von einem gegebenen Geldbestand das Wechselgeld abgezogen, und der aktualisierte Stand zurueckgegeben.
 % kasse(+Geldbetrag, +Muenzsystem, +Vorher, ?Wechselgeld, ?Nachher)
 
-kasse(G,M,V,W,N) :- changeback(G,W,M), vorhanden(W,V,N).
+kasse(G,M,V,W,N) :- changeback(G,W,M), 
+                    vorhanden(W,V,N).
 
+% Praedikat, dass den neuen Kassenstand errechnet(alter Kassenstand abzueglich des herausgegebenen Wechselgeldes)
 vorhanden([],[],[]).
-vorhanden([W1|W],[V1|V],[V2|N]) :- V1 >= W1, V2 is V1 - W1, vorhanden(W,V,N).
+vorhanden([W1|W],[V1|V],[V2|N]) :- V1 >= W1, 
+                                   V2 is V1 - W1, 
+                                   vorhanden(W,V,N).
 
 % opt_kasse(+Geldbetrag, +Muenzsystem, +Vorher, ?Wechselgeld, ?Nachher)
 
@@ -75,20 +38,31 @@ opt_kasse(G,M,V,W,N) :- kasse(G,M,V,W,N), !.
 
 % warenautomat(+Muenzen, +Preis, +Muenzsystem, +Vorher, ?Wechselgeld, ?Nachher)
 
-warenautomat(M,P,MS,V,W,N) :- sort(MS,X), reverse(X,Y), summe(M,Y,A), B is A - P, B >= 0, opt_kasse(B,Y,V,W,N).
+warenautomat(M,P,MS,V,W,N) :- sort(MS,X), % Sortiert zur Sicherheit das Muenzsystem von klein nach groß
+                              reverse(X,Y), % Dreht die Liste einmal um, damit wir weiterrechnen koennen (unsere anderen Praedikate arbeiten so)
+                              summe(M,Y,A), % errechnet die Gesamtsumme der uebergebenen Muenzen
+                              B is A - P, % Berechnet das Wechselgeld(Eingeworfenes Geld - Produktpreis)
+                              B >= 0, % Natuerlich muss dieser Differenzbetrag groesser null sein, sonst wurde zu wenig eingeworfen
+                              opt_kasse(B,Y,V,W,N). % Ruft, wie gehabt, die optimale Kasse auf
 
+% summe(+Muenzen,+Muenzsystem,?Gesamtbetrag)
 summe([],[],0).
-summe([M1|M],[MS1|MS],S) :- summe(M,MS,S1) , S is S1 + M1 * MS1.
+summe([M1|M],[MS1|MS],S) :- summe(M,MS,S1) , 
+                            S is S1 + M1 * MS1.
 
-
+% Simuliert einen Kauf-Vorgang. Dabei wird der Kassenstand aktualisiert.
 % kaufen(+Muenzen, +Preis, ?Wechselgeld, -Nachher)
 
-kaufen(M,P,W,N) :- reverse(M,A), my_ms(MS), kassenstand(V), warenautomat(A,P,MS,V,W,N), retract(kassenstand(V)), assert(kassenstand(N)).
+kaufen(M,P,W,N) :- reverse(M,A), 
+                   my_ms(MS), 
+                   kassenstand(V), 
+                   warenautomat(A,P,MS,V,W,N), 
+                   retract(kassenstand(V)), 
+                   assert(kassenstand(N)).
 
 my_ms([1,2,5,10,20,50,100,200]). %Eurosystem
 :- dynamic kassenstand/1.
 kassenstand([10,10,10,10,10,10,10,10]).
->>>>>>> origin/master
 
 %%% 2.3 word2trie %%%
 
