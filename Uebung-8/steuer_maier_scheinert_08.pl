@@ -73,7 +73,7 @@ Test; Wir haben von jeder Muenzsorte 10 Stueck in der Kasse. 120 soll ausgegeben
 %%% (1.Bonus) %%%    
 Dafuer wurde das Praedikat warenautomat/6 definiert. Die Funktionsweise wurde in praedikate.pl beschrieben.
 Darueberhinaus haben wir ein weiteres Praedikat kaufen/4 definiert, welches einen Kauf-Vorgang abbildet.
-Dabei wird auch in der Datenbank der Kassenstand durch rectract und assert aktualisiert.
+Dabei wird auch in der Datenbank der Kassenstand durch retract und assert aktualisiert.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Aufgabe 2 %%%%%%%%%%%%%%%%%
