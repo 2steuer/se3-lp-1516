@@ -1,5 +1,7 @@
 :- dynamic energy_time_series/4.
 
+% convertJSON(+Filepath)
+% oeffnet,laedt und schreibt letztenendes die Eintraege in data.pl im gewuenschten energy_time_series-Format.
 convertJSON(File):- 	use_module(library(http/json)),
 	open(File,read,Input),
 	json_read(Input,JSON),
@@ -9,9 +11,12 @@ convertJSON(File):- 	use_module(library(http/json)),
 	close(Write),
 	[data].
 
+% handleJSON(+JSON-File,+Stream)	
 handleJSON([],_).
 handleJSON([A1|A],W):- makeJSON(A1,W), handleJSON(A,W).
 
+% makeJSON(+JSON-Listenelement,+Stream)
+% Bringt ein Listenelement des eingelesenen JSON-Files in das von der Aufgabenstellung gewuenschte Format.
 makeJSON(json([key=[json([_,de= Type,_,_])],_,_,_,values=[[Starttime|A]|B]]),W):- 
 	mJ(Type,Starttime,A,B,W).
 makeJSON(json([key=[json([_,de= Type,_,_])],_,_,values=[[Starttime|A]|B]]),W):- 
@@ -19,16 +24,20 @@ makeJSON(json([key=[json([_,de= Type,_,_])],_,_,values=[[Starttime|A]|B]]),W):-
 makeJSON(json([key=[json([_,de= Type,_,_])],_,values=[[Starttime|A]|B]]),W):-
 	mJ(Type,Starttime,A,B,W).
 
+% mJ(+Type,+Starttime,+Wert,+WerteListe,+Stream)
+% Dieses Praedikat schreibt den Eintrag in data.pl	.
 mJ(Type,Starttime,A,B,Write):-
 	valuemaker([[Starttime|A]|B],[],Values),
 	write_canonical(Write,energy_time_series(Type,Starttime,3600,Values)),
 	writeln(Write,'.').
-																			
+
+% valuemaker(+WerteListe,+Akku,?Valueliste)
+% Nimmt sich aus der Werteliste, welche Eintraege bestehend aus Zeit und Wert besitzt, nur die Werte und packt diese in eine neue Liste.	
 valuemaker([],A,B):- reverse(A,B).
 valuemaker([[_,A2]|A],B,C):- valuemaker(A,[A2|B],C).
 
-
-
+% gran_changer(+Type,+Granularitaet,?energy_time_series-Struktur)
+% Aendert die Granularitaet fuer einen energy_time_series-Eintrag.
 gran_changer(Type, G, F) :- 
 	energy_time_series(Type, Starttime,T1,V1),
 	F = energy_time_series(Type, Starttime,G,V2),
@@ -37,7 +46,8 @@ gran_changer(Type, G, F) :-
 	integer(A),
 	calc_val(V1,A,[],A,0,V2),!.
 	
-
+% calc_val(+Valueliste,+Vergroesserungsfaktor,+Akku,+FesterVergroesserungsfaktor,+Startsumme,?neueGranularitaet)
+% nimmt eine Valueliste und passt sie an die gegebene Granularitaet an. 
 calc_val(A,0,V2a,B,X,V2) :-
 	calc_val(A,B,[X|V2a],B,0,V2).
 calc_val([],_,V2a,_,_,V2) :- reverse(V2a,V2).
@@ -48,39 +58,51 @@ calc_val([V1|V],A,V2a,B,X,V2):-
 	calc_val(V,A1,V2a,B,X1,V2).
 
 
-
+% transp(+Liste,?transponierteListe)
+% transponiert eine Liste.
 transp([A1|A],B2):-
 	t1(A1,[],B),
 	transp2(A,B,B1),
 	reverse_lists(B1,B2,[]).
 
+% transp2(+Liste,+bereitskorrekteListe,?BeideListenvereint)
+% Hilsfunktion von transp.	
 transp2([],B,B).
 transp2([A1|A],B,B1) :-
 	t2(A1,B,B2,[]),
 	transp2(A,B2,B1).
 
+% t1(+Liste,+Akku,+neueListe)
+% Macht aus einer n-elementigen Liste eine Liste mit n inneren Listen. Wichtig fuer den Anfang.	
 t1([],B,B1) :- reverse(B,B1).
 t1([A1|A],B,B1) :- t1(A,[[A1]|B],B1).
 
+% t2 (+Liste1,+Liste2,?neueListe,+Akku)
+% Fuegt jeweils ein Element von Liste1 in eine Unterliste von Liste2.
 t2([],_,B1,B) :- B = B1.
 t2([A1|A],[B1|B],B2,B3) :- is_list(B1), t2(A,B,B2,[[A1|B1]|B3]).
 
-
+% reverse_lists(+Liste,?neueListe,+Akku)
+% Dreht alle inneren Listen einer Liste um.
 reverse_lists([],B,B).
 reverse_lists([A1|A],B,C) :- reverse(A1,A2), reverse_lists(A,B,[A2|C]).
 
-
+% Berechnet den totalen Stromverbrauch, indem alle Werte aller Erzeugungsarten addiert werden.
 total :- 
 	findall(Values,energy_time_series(_, 1388530800000,3600, Values),X),
 	transp(X,Y),
 	sumlists(Y,[],Z),
 	assert(energy_time_series('Total',1388530800000,3600,Z)).
 
+% sumlists(+Liste,+Akku,?SumListe)
+% Summiert die inneren Listen einer Liste auf.	
 sumlists([],Z,E) :- reverse(Z,E).
 sumlists([Y1|Y],Z,E) :- 
 	sum_list(Y1,S),
 	sumlists(Y,[S|Z],E).
-
+	
+% pearson_kor(+Zeitreihe1,+Zeitreihe2,?Korrelation)	
+% Umsetzung der Formel.
 pearson_kor(R1,R2,E) :-
 	length(R1,N),
 	length(R2,N),
@@ -94,16 +116,22 @@ pearson_kor(R1,R2,E) :-
 	E3 is sqrt(N*Z5-Z3*Z3),
 	E is E1/(E2*E3).
 
+% prodlist(+Liste1,+Liste2,?ProdListe)
+% Nimmt zwei Listen,multipliziert indexgleiche Elemente miteinander und tut die Ergebnise wieder in eine Liste.	
 prodlist([],[],E,E).
 prodlist([A1|A],[B1|B],Z,E) :-
 	K is A1*B1+Z,
 	prodlist(A,B,K,E).
 
+% korrelation(+Type)
+% Findet die Stromerzeugungsart, die am staerksten mit dem Gesamtstromverbrauch korreliert.
 korrelation(E) :-
 	findall([Art,Values],(energy_time_series(Art, 1388530800000,3600, Values),not(Art='Total')),X),
 	energy_time_series('Total',1388530800000,3600,Z),
 	korr(X,Z,-1,_,E),!.
 
+% korr(+Liste,+Total-Values,+Pearson-WorstCase,?Artspeicherung,?Ergebnis)
+% Praedikat, dass fuer jede Stromerzeugungsart mit dem Totalverbrauch die Korrelation berechnet, und das groesste Ergebnis zurueckgibt.	
 korr([],_,_,E,E).
 korr([[X,Y]|A],Z,B,_,F) :-
 	pearson_kor(Y,Z,C),
@@ -112,7 +140,9 @@ korr([[X,Y]|A],Z,B,_,F) :-
 korr([_|A],Z,B,E,F) :-
 	korr(A,Z,B,E,F).
 
-%lastprofil(Typ, Granularität, Profil)
+	
+%lastprofil(+Typ, +Granularität, ?Profil)
+% berechnet das Lastprofil zu einer gegebenen Stromerzeugungsart und einer gegebenen Granularitaet.
 lastprofil(energy_time_series(_,_,T1,V),G,P) :-
 	A is G/T1,
 	A >= 1,
@@ -123,6 +153,8 @@ lastprofil(energy_time_series(_,_,T1,V),G,P) :-
 	sumlists(F,[],Z),
 	divlist(Z,H,[],P),!.
 
+% split_lists(+Valueliste,+Faktor,+Akku,+Faktorsicherung,?Ergebnis)
+% Passt eine Valueliste der Granularitaet an, bestimmte Werte werden also zusammengetan (bsp. Alle Montage)	
 split_lists([],_,E,_,F) :- reverse_lists(E,F,[]).
 split_lists([V1|V],0,B,C,E) :-
 	A is C-1,
@@ -132,20 +164,13 @@ split_lists([V1|V],A,[B1|B],C,E) :-
 	A1 is A-1,
 	split_lists(V,A1,[[V1|B1]|B],C,E).
 
-
-
+% divlist(+Liste,+Divisor,+Akku,?Ergebnis)
+% Bildet den Mittelwert.	
 divlist([],_,A,B) :- reverse(A,B).
 divlist([V1|V],A,B,E) :-
 	V2 is V1/A,
 	divlist(V,A,[V2|B],E).
 
-
-
-
-%?- gran_changer('TotalUnknown',86400,U),lastprofil(U,604800,P).
-%U = energy_time_series('TotalUnknown', 0, 86400, [1377.8279999999997, 1136.6079999999997, 1040.225, 1310.8579999999997, 1348.6180000000002, 1337.518, 1337.283, 1315.872|...]),
-%P = [1382.9299999999998, 1221.26875, 1183.483, 1358.33025, 1310.20525, 1317.47125, 1382.7247499999999].
-%Beginnt Freitags! (Da Sonntag = niedrigster Stromverbrauch)
 
 :- convertJSON('month_2014_01.json').
 :- total.
