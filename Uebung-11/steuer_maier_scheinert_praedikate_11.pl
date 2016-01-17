@@ -95,3 +95,47 @@ merkmal_ratgeber(Merkmale, giftig) :- member(lamellen, Merkmale), !.
 merkmal_ratgeber(Merkmale, geniessbar) :- member(braune_lamellen, Merkmale), !.
 
 merkmal_ratgeber(_, essbar). % Alle unbekannten Kombinationen sind essbar. No risk, no fun!
+
+%% Aufgabe 3
+
+% dict(?Eng, ?Ger)
+% Beinhaltet woerterbucheintraege von englisch nach deutsch.
+dict(he, er).
+dict(caught, fing).
+dict(a, einen).
+dict(a, eine).
+dict(butterfly, schmetterling).
+dict(hello, hallo).
+dict(makes, macht).
+dict(himself, sich).
+dict(out, aus).
+dict(the, dem).
+dict(the, der).
+dict(dust, staub).
+dict(me, mir).
+dict(you, dir).
+dict(you, du).
+dict(nothing, nichts).
+dict(job, beruf).
+dict(profession, beruf).
+
+% idiom(?Eng, ?Ger)
+% Beinhaltet Idiome und deren Uebersetzung
+idiom([he, caught, a, cold], [er, hat, sich, erkaeltet]).
+idiom([he, carries, owls, to, newcastle], [er, traegt, eulen, nach, athen]).
+idiom([he, hit, the, sack], [er, ging, schlafen]).
+
+% find_word(?Eng, ?Ger)
+% Gibt eine Uebersetzung eines Wortes aus der Datenbank zurueck (bei unterspezifiziertem Aufruf).
+% Ist ein Wort nicht in der Datenbank vorhanden, wird der Input selbst zurueckgegeben.
+find_word(Eng, Ger) :- dict(Eng, Ger).
+find_word(Eng, Ger) :- \+ dict(Eng, Ger), Ger = Eng.
+
+% translate(?Eng, ?Ger).
+% Uebersetzt eine Uebergebene Liste von Worten von Englsich nach Deutsch oder anders herum.
+% Prueft zunaechst ob ein Idiom uebergeben wurde, ist dies nicht der Fall, so wird Wort fuer Wort uebersetzt.
+% Nicht bekannte Worte werden dabei un-uebersetzt uebernommen.
+translate(Eng, Ger) :- idiom(Eng, Ger), !.
+
+translate([EFirst|ERest], [GFirst|GRest]) :- translate(ERest, GRest), find_word(EFirst, GFirst).
+translate([], []).

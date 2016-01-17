@@ -70,3 +70,59 @@
 
 % Hier ist die Regel-Reihenfolge wichtig, waere die Regel (roehren, am_baum) -> ungeniessbar oben gestanden,
 % So waere der Pilz als ungiftig, aber ungeniessbar gekennzeichnet worden.
+
+%%% Aufgabe 3
+
+% Einfache uebersetzungen:
+
+?- translate(X, [er, fing, einen, schmetterling]).
+% X = [he, caught, a, butterfly] ;
+% false.
+
+?- translate([he, caught, a, butterfly], X).
+% X = [er, fing, einen, schmetterling] ;
+% X = [er, fing, eine, schmetterling] ;
+% false.
+
+?- translate([he, makes, himself, out, of, the, dust], X).
+% X = [er, macht, sich, aus, of, dem, staub] ;
+% X = [er, macht, sich, aus, of, der, staub] ;
+% false.
+
+?- translate(X, [mir, nichts, dir, nichts]).
+% X = [me, nothing, you, nothing] ;
+% false.
+
+% Idiome:
+?- translate(X, [er, ging, schlafen]).
+% X = [he, hit, the, sack].
+
+?- translate([he, carries, owls, to, newcastle], X).
+% X = [er, traegt, eulen, nach, athen].
+
+
+% Unbekannte Worte:
+?- translate(X, [er, fing, einen, elefanten]).
+% X = [he, caught, a, elefanten] ;
+% false.
+
+?- translate([he, caught, a, horse], X).
+% X = [er, fing, einen, horse] ;
+% X = [er, fing, eine, horse] ;
+% false.
+
+% Alternative Uebersetzungen schon oben, aber dennoch:
+?- translate([the, job], X).
+% X = [dem, beruf] ;
+% X = [der, beruf] ;
+% false.
+
+?- translate(X, [der, beruf]).
+% X = [the, job] ;
+% X = [the, profession] ;
+% false.
+
+% Vollstaendig spezifiziert (Zur Korrektur von Englisch-Klausuren!):
+?- translate([the, profession], [der, beruf]).
+% true ;
+% false.
