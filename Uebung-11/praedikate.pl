@@ -8,6 +8,7 @@
 
 vogel(pinguin, kann_nicht_fliegen).
 vogel(strauss, kann_nicht_fliegen).
+vogel(juergen, kann_nicht_fliegen).
 vogel(X, kann_fliegen) :- \+ vogel(X, kann_nicht_fliegen).
 
 %%%%%%%%%%%%%%%%%%
@@ -19,7 +20,7 @@ vogel(X, kann_fliegen) :- \+ vogel(X, kann_nicht_fliegen).
 merkmale(steinpilz, [roehren]).
 merkmale(maronen, [roehren]).
 merkmale(butterpilz, [roehren]).
-merkmale(champignon, [braune_lamellen]).
+merkmale(champignon, [braune_lamellen, trockene_oberflaeche]). % Zu Testzwecken die trockene oberflaeche eingefuegt.
 merkmale(giftchampignon, [braune_lamellen, gelbe_flecken]).
 merkmale(karbolchampignon, [braune_lamellen, stinkt]).
 merkmale(fliegenpilz, [lamellen, punkte]).
@@ -51,6 +52,9 @@ hat_merkmale(Objekt, Merkmale) :- merkmale(Objekt, MerkmalListe), member_all(Mer
 % Erreichnet fuer einen gegebenen Pilz oder eine gegebene Liste von Merkmalen die Essbarkeit oder
 % geniessbarkeit eines von Pilzfreunden gefundenen Pilzes.
 % Ist eine Merkmalliste uebergeben, so werden alle passenden Pilze inklusive ihrer essbarkeit ausgegeben.
+% Trifft die Merkmalliste jedoch auf einen Pilz exakt zu, so wird nur dieser Pilz ausgegeben.
+% Dies setzt voraus, dass alle Pilze mit allen ihren Merkmalen oben angegeben waeren, sonst
+% fuehrt dieses feature zu oft zu schnellen abbruechen.
 % Wird in diesem vollumfaenglichen Nachschlagwerk fuer fungiphile wider erwarten
 % kein passender Eintrag gefunden, so wird der Pilz als unbekannt deklariert und anhand bestehender
 % Regelwerke die essbarkeit des gefundenen Prachtstueckes geschaetzt.
